@@ -20,15 +20,15 @@ const exerciseRouter = require("./routes/exercises");
 const userRouter = require("./routes/users");
 
 app.get("/", (req, res) => {
-  // var dataToSend;
-  // const python = spawn("python", ["./pythonScript/lineupGen.py", "1"]);
-  // python.stdout.on("data", function (data) {
-  //   dataToSend = data.toString();
-  // });
-  // python.on("close", (code) => {
-  //   res.send(dataToSend);
-  // });
-  res.send("connected");
+  var dataToSend;
+  const python = spawn("python", ["./pythonScript/lineupGen.py", "1"]);
+  python.stdout.on("data", function (data) {
+    dataToSend = data.toString();
+  });
+  python.on("close", (code) => {
+    res.send(dataToSend);
+  });
+  // res.send("connected");
 });
 
 app.use("/exercises", exerciseRouter);
